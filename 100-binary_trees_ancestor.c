@@ -12,17 +12,21 @@
 binary_tree_t *binary_trees_ancestor(const binary_tree_t
 		*first, const binary_tree_t *second)
 {
-	binary_tree_t *ma, *pa;
+	binary_tree_t *tmp;
 
-	if (!first || !second)
+	if (first == NULL || second == NULL)
 		return (NULL);
-	if (first == second)
-		return ((binary_tree_t *)first);
-
-	ma = first->parent, pa = second->parent;
-	if (first == pa || !ma || (!ma->parent && pa))
-		return (binary_trees_ancestor(first, pa));
-	else if (ma == second || !pa || (pa->parent && ma))
-		return (binary_trees_ancestor(ma, second));
-	return (binary_trees_ancestor(ma, pa));
+	tmp = (binary_tree_t *)second;
+	while (first)
+	{
+		while (second)
+		{
+			if (first == second)
+				return ((binary_tree_t *)first);
+			second = second->parent;
+		}
+		second = tmp;
+		first = first->parent;
+	}
+	return (NULL);
 }
