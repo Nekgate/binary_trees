@@ -20,8 +20,8 @@ int greater_than(const binary_tree_t *tree, int val)
 	{
 		lt = greater_than(tree->left, val);
 		rt = greater_than(tree->right, val);
-        if (lt && rt)
-		    return (1);
+		if (lt && rt)
+			return (1);
 	}
 	return (0);
 }
@@ -44,8 +44,8 @@ int less_than(const binary_tree_t *tree, int val)
 	{
 		lt = less_than(tree->left, val);
 		rt = less_than(tree->right, val);
-        if (lt && rt)
-		    return (1);
+		if (lt && rt)
+			return (1);
 	}
 	return (0);
 }
@@ -66,7 +66,10 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 	if (less_than(tree->left, tree->n) && greater_than(tree->right, tree->n))
 	{
 		if (!tree->left || binary_tree_is_bst(tree->left))
-			return (1);
+		{
+			if (!tree->right || binary_tree_is_bst(tree->right))
+				return (1);
+		}
 	}
 	return (0);
 }
